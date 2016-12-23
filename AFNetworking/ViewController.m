@@ -29,7 +29,7 @@
 - (IBAction)getRequest:(id)sender
 {
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
-    [manager GET:@"http://runmile.com/api/web/v1/user/adon" parameters:nil progress:nil success:^(NSURLSessionTask *task , id response)
+    [manager GET:<get url> parameters:nil progress:nil success:^(NSURLSessionTask *task , id response)
     {
         NSMutableArray *availabel_locale = [[response valueForKey:@"data"] valueForKey:@"availabel_locale"];
         for (int i =0; i<[availabel_locale count]; i++) {
@@ -57,7 +57,7 @@
     [param setValue:device forKey:@"device"];
     
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
-    [manager POST:@"http://runmile.com/api/web/v1/user/login" parameters:param progress:nil success:^(NSURLSessionTask *task , id response){
+    [manager POST:<post url> parameters:param progress:nil success:^(NSURLSessionTask *task , id response){
         NSLog(@"Post = %@",response);
     }
     failure:^(NSURLSessionTask *task , NSError *error){
@@ -69,8 +69,8 @@
     [param setValue:@"surat" forKey:@"from_address"];
     
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
-    [manager.requestSerializer setValue:@"VVb419EerxCnpQfGv0pkJsKa84Fj1WzngxPJRvce" forHTTPHeaderField:@"TeckskyAuth"];
-    [manager POST:@"http://runmile.com/api/web/v1/trip/search" parameters:param progress:nil success:^(NSURLSessionTask *task , id response){
+    [manager.requestSerializer setValue:@"VVb419EerxCnpQfGv0pkJsKa84Fj1WzngxPJRvce" forHTTPHeaderField:@"Auth"];
+    [manager POST:<post Auth url> parameters:param progress:nil success:^(NSURLSessionTask *task , id response){
         NSLog(@"Post with Auth = %@",response);
     }
     failure:^(NSURLSessionTask *task , NSError *error){
@@ -84,7 +84,7 @@
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     [manager.requestSerializer setValue:@"VVb419EerxCnpQfGv0pkJsKa84Fj1WzngxPJRvce" forHTTPHeaderField:@"TeckskyAuth"];
     manager.requestSerializer.HTTPMethodsEncodingParametersInURI = nil;
-    [manager DELETE:@"http://runmile.com/api/web/v1/parts/delete" parameters:param success:^(NSURLSessionTask *task , id response)
+    [manager DELETE:<delete url> parameters:param success:^(NSURLSessionTask *task , id response)
     {
         NSLog(@"Delete = %@",response);
     }
